@@ -4,11 +4,11 @@ def display_board(board):
             print(cell, end='  ')
         print()
 
-def ask_input(w):
+def ask_input(w, board):
     r = int(input("In which row do you want to place your mark? : "))
     c = int(input("In which cell / column do you want to place your mark? : "))
 
-    while c < 1 or c > w or r < 1 or r > w:
+    while c < 1 or c > w or r < 1 or r > w or board[r - 1][c - 1] != '-':
         print("Invalid input.")
         r = int(input("In which row do you want to place your mark? : "))
         c = int(input("In which cell / column do you want to place your mark? : "))
@@ -16,18 +16,23 @@ def ask_input(w):
     return r, c
 
 def is_game_over(board):
+    w = len(board)
     for mark in ('X', 'O'):
-        for i in range(len(board)):
+        for i in range(w):
             if all(cell in ('X', 'O') for row in board for cell in row):
+                print("Board full")
                 return True
 
             if all(cell == mark for cell in board[i]):
+                print("Row filled")
                 return True
             
-            if all(board[row][i] == mark for row in range(len(board))):
+            if all(board[row][i] == mark for row in range(w)):
+                print("Vertical filled")
                 return True
-           
-        if all(board[i][i] == mark for i in range(len(board))) or all(board[len(board) - 1 - i][len(board) - 1 - i] for i in range(len(board))):
+            
+        if all(board[i][i] == mark for i in range(w)) or all(board[i][w - 1 - i] == mark for i in range(w)):
+            print("Diagonal filled")
             return True
         
     return False
@@ -49,7 +54,7 @@ def main():
         for mark in ('X', 'O'):
             print(f"{mark} is up next.")
 
-            spot_marked = ask_input(w)
+            spot_marked = ask_input(w, board)
             board[spot_marked[0] - 1][spot_marked[1] - 1] = mark
             
             display_board(board)
