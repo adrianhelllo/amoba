@@ -56,7 +56,7 @@ def main():
             display_board(board)
 
             if is_game_over(board):
-                print("Game over!")
+                print(f"Game over, {mark} wins!")
                 playing = False
                 break
 
