@@ -20,19 +20,15 @@ def is_game_over(board):
     for mark in ('X', 'O'):
         for i in range(w):
             if all(cell in ('X', 'O') for row in board for cell in row):
-                print("Board full")
                 return True
 
             if all(cell == mark for cell in board[i]):
-                print("Row filled")
                 return True
             
             if all(board[row][i] == mark for row in range(w)):
-                print("Vertical filled")
                 return True
             
         if all(board[i][i] == mark for i in range(w)) or all(board[i][w - 1 - i] == mark for i in range(w)):
-            print("Diagonal filled")
             return True
         
     return False
