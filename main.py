@@ -33,8 +33,7 @@ def is_game_over(board):
         
     return False
         
-            
-
+    
 
 def main():
     w = int(input("How wide should the board be? [width > 2]: "))
@@ -56,7 +55,11 @@ def main():
             display_board(board)
 
             if is_game_over(board):
-                print(f"Game over, {mark} wins!")
+                print(f"Game over, " end=" ")
+                if all(cell in ('X', 'O') for row in board for cell in row):
+                    print("it's a tie!")
+                else:
+                    print(f"{mark} wins!")
                 playing = False
                 break
 
@@ -64,3 +67,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
