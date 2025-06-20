@@ -55,7 +55,7 @@ def main():
             display_board(board)
 
             if is_game_over(board):
-                print(f"Game over, " end=" ")
+                print(f"Game over, ", end=" ")
                 if all(cell in ('X', 'O') for row in board for cell in row):
                     print("it's a tie!")
                 else:
